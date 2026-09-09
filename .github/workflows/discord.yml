@@ -15,5 +15,5 @@ jobs:
            TITEL: ${{ github.event.pull_request.title }}
          run: |
            curl -X POST -H "Content-Type: application/json" \
-             -d "{\"content\": \"$VEM öppnade PR **$TITEL$ i $REPO\"}" \
+             -d "{\"content\": \"$VEM pullade till $REPO\"}" \
              "$WEBHOOK"
