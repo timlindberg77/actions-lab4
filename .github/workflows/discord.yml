@@ -1,19 +1,20 @@
 name: Meddela Discord
+
 on:
   pull_request:
-   branches: [ main ]
+    branches: [ main ]
 
 jobs:
   notis:
-     runs-on: ubuntu-latest
-     steps:
-       - name: Skicka meddelande
-         env:
-           WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-           VEM: ${{ github.actor }}
-           REPO: ${{ github.repository }}
-           TITEL: ${{ github.event.pull_request.title }}
-         run: |
-           curl -X POST -H "Content-Type: application/json" \
-             -d "{\"content\": \"$VEM pullade till $REPO\"}" \
-             "$WEBHOOK"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skicka meddelande
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          VEM: ${{ github.actor }}
+          REPO: ${{ github.repository }}
+          TITEL: ${{ github.event.pull_request.title }} 
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            -d "{\"content\": \"$VEM öppnade PR **$TITEL** i $REPO\"}" \
+            "$WEBHOOK"
