@@ -1,6 +1,6 @@
 name: Meddela Discord
 on:
-  push:
+  pull_request:
    branches: [ main ]
 
 jobs:
@@ -12,7 +12,8 @@ jobs:
            WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
            VEM: ${{ github.actor }}
            REPO: ${{ github.repository }}
+           TITEL: ${{ github.event.pull_request.title }}
          run: |
            curl -X POST -H "Content-Type: application/json" \
-             -d "{\"content\": \"$VEM pushade till $REPO\"}" \
+             -d "{\"content\": \"$VEM öppnade PR **$TITEL$ i $REPO\"}" \
              "$WEBHOOK"
